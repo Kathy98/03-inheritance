@@ -10,14 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/**
- * @author Peter Kurfer
- * Created on 10/7/17.
- */
 public class CatTest {
 
 	private static final int Sleep = 10;
-	private static final int Awake = 15;
+	private static final int Awake = 15; // setzt sich aus digest, playful, hungry zusammen
 	private static final int Digest = 10;
 
 	private Cat animal;
@@ -42,28 +38,28 @@ public class CatTest {
 	}
 
 	@Test
-	void testAnimalGettingPlayful() {
-		//Waiting while animal is sleeping
+	void testAnimalGettingPlayful(){
+		// Waiting while animal is sleeping
 		IntStream.range(0, Sleep).forEach(i -> animal.tick());
 		animal.feed();
-		//Waiting while animal is digesting
+		// Waiting while animal is digesting
 		IntStream.range(0, Digest).forEach(i -> animal.tick());
 		assertTrue(animal.isPlayful());
 	}
 
 	@Test
 	void testAnimalDying(){
-		//Waiting while animal is sleeping and awake before it's going to die
+		// Waiting while animal is sleeping and awake before it's going to die
 		IntStream.range(0, Sleep + Awake).forEach(i -> animal.tick());
 		assertTrue(animal.isDead());
 	}
 
 	@Test
 	void testAnimalIsGoingToSleepAgain(){
-		//Waiting while animal is sleeping
+		// Waiting while animal is sleeping
 		IntStream.range(0, Sleep).forEach(i -> animal.tick());
 		animal.feed();
-		//Waiting while animal is digesting and in playful mood
+		// Waiting while animal is digesting and in playful mood
 		IntStream.range(0, Awake).forEach(i -> animal.tick());
 		assertTrue(animal.isAsleep());
 	}
